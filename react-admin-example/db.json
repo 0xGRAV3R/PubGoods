@@ -1,0 +1,31 @@
+{
+    "posts": [
+        {
+            "id": "1",
+            "title": "Post One",
+            "body": "This is the post body",
+            "publishedAt": "07-07-2023"
+        },
+        {
+            "id": "1",
+            "title": "Post Two",
+            "body": "This is the post body",
+            "publishedAt": "07-07-2023"
+        },
+        {
+            "id": "1",
+            "title": "Post Three",
+            "body": "This is the post body",
+            "publishedAt": "07-07-2023"
+        }
+
+    ],
+    "users": [
+        {
+            "id": "1",
+            "name": "rollo",
+            "ens": "rollo.eth"
+        }
+    ]
+
+}
