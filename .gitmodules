@@ -1,0 +1,3 @@
+[submodule "fevm/fevm-hardhat-kit"]
+	path = fevm/fevm-hardhat-kit
+	url = https://github.com/filecoin-project/fevm-hardhat-kit.git
