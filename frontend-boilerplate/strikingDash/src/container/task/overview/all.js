@@ -1,6 +1,7 @@
+import { usePolybase, useCollection } from "@polybase/react";
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Checkbox, Input, Form, Modal } from 'antd';
 import FeatherIcon from 'feather-icons-react';
 import { Button } from '../../../components/buttons/buttons';
@@ -10,9 +11,11 @@ import { TaskListWrap } from '../style';
 import { onStarUpdate, ontaskDelete, onCompleteUpdate, ontaskEdit } from '../../../redux/task/actionCreator';
 
 function All() {
+  const polybase = usePolybase();
+  const { data: task } = useCollection(polybase.collection("Task"));
+  console.log('data', task?.data)
   const dispatch = useDispatch();
   const [form] = Form.useForm();
-  const task = useSelector((state) => state.Task.data);
   const [state, setState] = useState({
     visible: false,
     taskEditId: '',
@@ -69,11 +72,11 @@ function All() {
           <h2 className="sDash_task-list-title">Task Lists</h2>
         </div>
         <div className="sDash_tasklist-body">
-          {task.length > 0 ? (
+          {task && task.data.length > 0 ? (
             <ul className="sDash_tasks">
-              {task
-                .sort((a, b) => b.id - a.id)
-                .map((item, i) => {
+              {task.data
+                .sort((a, b) => b.data.id - a.data.id)
+                .map(({data: item}, i) => {
                   return (
                     <li className="sDash_tasks-item" key={i}>
                       <div className="sDash_tasks-item__content">
@@ -138,10 +141,10 @@ function All() {
         forceRender
       >
         <div className="sDash_addTask-modal-inner">
-          {task
-            .sort((a, b) => b.id - a.id)
-            .filter((item) => item.id === taskEditId)
-            .map((value, i) => {
+          {task && task.data
+            .sort((a, b) => b.data.id - a.data.id)
+            .filter(({data: item}) => item.id === taskEditId)
+            .map(({data: value}, i) => {
               return (
                 <BasicFormWrapper key={i}>
                   <Form form={form} name="add-task" onFinish={(eData) => onEditHandle(eData, value.id)}>
