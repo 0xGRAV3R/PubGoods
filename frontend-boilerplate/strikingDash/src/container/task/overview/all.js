@@ -13,7 +13,6 @@ import { onStarUpdate, ontaskDelete, onCompleteUpdate, ontaskEdit } from '../../
 function All() {
   const polybase = usePolybase();
   const { data: task } = useCollection(polybase.collection("Task"));
-  console.log('data', task?.data)
   const dispatch = useDispatch();
   const [form] = Form.useForm();
   const [state, setState] = useState({
