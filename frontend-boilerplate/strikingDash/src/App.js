@@ -1,3 +1,5 @@
+import { PolybaseProvider } from "@polybase/react";
+import { Polybase } from "@polybase/client";
 import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { hot } from 'react-hot-loader/root';
@@ -13,6 +15,9 @@ import './static/css/style.css';
 import config from './config/config';
 import ProtectedRoute from './components/utilities/protectedRoute';
 import 'antd/dist/antd.less';
+
+
+const polybase = new Polybase({defaultNamespace:  "pk/0x6291a71f6e1a57cb1fa136ae1c298e017df3ae67efb6bbab7cb59316fdf9a1a09d1fa8f6075825f982ba80b3653bf330cdfb147ab3ed56bdc8bdb4eb27de4955/PubGoods"});
 
 const { theme } = config;
 
@@ -39,6 +44,7 @@ const ProviderConfig = () => {
   }, [setPath]);
 
   return (
+    <PolybaseProvider polybase={polybase}>
     <ConfigProvider direction={rtl ? 'rtl' : 'ltr'}>
       <ThemeProvider theme={{ ...theme, rtl, topMenu, darkMode }}>
         <ReactReduxFirebaseProvider {...rrfProps}>
@@ -57,6 +63,7 @@ const ProviderConfig = () => {
         </ReactReduxFirebaseProvider>
       </ThemeProvider>
     </ConfigProvider>
+    </PolybaseProvider>
   );
 }
 
