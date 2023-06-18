@@ -1,4 +1,5 @@
 import { create } from 'ipfs-http-client';
+import {Buffer} from 'buffer';
 
 const projectId = '2H9PlkW4WSouTWsmpuTOFFBGwB3';
 
