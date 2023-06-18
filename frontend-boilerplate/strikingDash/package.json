@@ -3,6 +3,10 @@
   "version": "3.0.0",
   "private": true,
   "dependencies": {
+    "@ethersproject/abstract-provider": "^5.7.0",
+    "@ethersproject/contracts": "^5.7.0",
+    "@ethersproject/providers": "^5.7.2",
+    "@ethersproject/units": "^5.7.0",
     "@polybase/client": "^0.6.2",
     "@polybase/react": "^0.6.2",
     "@testing-library/jest-dom": "^5.16.5",
@@ -22,6 +26,7 @@
     "google-maps-react": "^2.0.6",
     "i": "^0.3.7",
     "immutability-helper": "^3.1.1",
+    "ipfs-http-client": "^60.0.1",
     "js-cookie": "^2.2.1",
     "leaflet": "1.7.1",
     "leaflet.markercluster": "^1.5.3",
@@ -68,11 +73,7 @@
     "swiper": "^8.0.7",
     "uuid": "^9.0.0",
     "web-vitals": "^2.1.4",
-    "xlsx": "^0.17.4",
-    "@ethersproject/abstract-provider": "^5.7.0",
-    "@ethersproject/providers": "^5.7.2",
-    "@ethersproject/units": "^5.7.0",
-    "@ethersproject/contracts": "^5.7.0"
+    "xlsx": "^0.17.4"
   },
   "homepage": "/strikingdash-react",
   "scripts": {

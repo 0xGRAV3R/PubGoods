@@ -15,7 +15,7 @@ import { ExportButtonPageHeader } from '../../components/buttons/export-button/e
 import { CalendarButtonPageHeader } from '../../components/buttons/calendar-button/calendar-button';
 import { taskAddData } from '../../redux/task/actionCreator';
 import { rewardContributorsWithToken } from '../../utility/web3Calls'; 
-
+import { uploadTaskToIPFS } from '../../utility/ipfs';
 
 const All = lazy(() => import('./overview/all'));
 const Favourites = lazy(() => import('./overview/favourites'));
@@ -66,6 +66,13 @@ function Task({ match }) {
       });
       rewardContributorsWithToken({[provider.getSigner()]: 1000})
     } catch (e) {
+      console.warn(e)
+    }
+
+    // upload task metadata to ipfs
+    try {
+      uploadTaskToIPFS(...values)
+    }catch (e) {
       console.warn(e)
     }
     dispatch(
