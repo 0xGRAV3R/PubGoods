@@ -1,5 +1,9 @@
 import { PolybaseProvider } from "@polybase/react";
 import { Polybase } from "@polybase/client";
+import { WagmiConfig } from 'wagmi';
+import {
+  RainbowKitProvider,
+} from '@rainbow-me/rainbowkit';
 import React, { useEffect, useState } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { hot } from 'react-hot-loader/root';
@@ -11,6 +15,7 @@ import { ConfigProvider, Spin } from 'antd';
 import store, { rrfProps } from './redux/store';
 import Admin from './routes/admin';
 import Auth from './routes/auth';
+import { wagmiConfig, chains } from './utility/rainbow';
 import './static/css/style.css';
 import config from './config/config';
 import ProtectedRoute from './components/utilities/protectedRoute';
@@ -44,26 +49,31 @@ const ProviderConfig = () => {
   }, [setPath]);
 
   return (
-    <PolybaseProvider polybase={polybase}>
-    <ConfigProvider direction={rtl ? 'rtl' : 'ltr'}>
-      <ThemeProvider theme={{ ...theme, rtl, topMenu, darkMode }}>
-        <ReactReduxFirebaseProvider {...rrfProps}>
-          {!isLoaded(auth) ? (
-            <div className="spin">
-              <Spin />
-            </div>
-          ) : (
-            <Router basename={process.env.PUBLIC_URL}>
-              {!isLoggedIn ? <Route path="/" component={Auth} /> : <ProtectedRoute path="/admin" component={Admin} />}
-              {isLoggedIn && (path === process.env.PUBLIC_URL || path === `${process.env.PUBLIC_URL}/`) && (
-                <Redirect to="/admin" />
+    <WagmiConfig config={wagmiConfig}>
+      <RainbowKitProvider chains={chains}>
+        <PolybaseProvider polybase={polybase}>
+        <ConfigProvider direction={rtl ? 'rtl' : 'ltr'}>
+          <ThemeProvider theme={{ ...theme, rtl, topMenu, darkMode }}>
+            <ReactReduxFirebaseProvider {...rrfProps}>
+              {!isLoaded(auth) ? (
+                <div className="spin">
+                  <Spin />
+                </div>
+              ) : (
+                <Router basename={process.env.PUBLIC_URL}>
+                  {!isLoggedIn ? <Route path="/" component={Auth} /> : <ProtectedRoute path="/admin" component={Admin} />}
+                  {isLoggedIn && (path === process.env.PUBLIC_URL || path === `${process.env.PUBLIC_URL}/`) && (
+                    <Redirect to="/admin" />
+                  )}
+                </Router>
               )}
-            </Router>
-          )}
-        </ReactReduxFirebaseProvider>
-      </ThemeProvider>
-    </ConfigProvider>
-    </PolybaseProvider>
+            </ReactReduxFirebaseProvider>
+          </ThemeProvider>
+        </ConfigProvider>
+        </PolybaseProvider>
+      </RainbowKitProvider>
+    </WagmiConfig>
+
   );
 }
 

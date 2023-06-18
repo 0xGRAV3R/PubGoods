@@ -213,6 +213,20 @@ const AuthWrapper = Styled.div`
               }
             }
           }
+          &.connect-wallet{
+            display: flex;
+            align-items: center;
+            padding: 0 30px;
+            @media only screen and (max-width: 379px){
+              padding: 0 5px;
+            }
+            img{
+              margin-right: 8px;
+              @media only screen and (max-width: 379px){
+                margin-right: 4px;
+              }
+            }
+          }
           &.facebook-sign{
             color: #475993;
           }

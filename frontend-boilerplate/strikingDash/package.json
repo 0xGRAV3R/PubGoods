@@ -9,6 +9,7 @@
     "@ethersproject/units": "^5.7.0",
     "@polybase/client": "^0.6.2",
     "@polybase/react": "^0.6.2",
+    "@rainbow-me/rainbowkit": "^1.0.2",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -73,6 +74,8 @@
     "styled-components": "^5.3.6",
     "swiper": "^8.0.7",
     "uuid": "^9.0.0",
+    "viem": "^1.0.7",
+    "wagmi": "^1.2.0",
     "web-vitals": "^2.1.4",
     "xlsx": "^0.17.4"
   },
