@@ -1,4 +1,5 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
+import { JsonRpcProvider } from '@ethersproject/providers';
 import React, { useState, lazy, Suspense, useLayoutEffect } from 'react';
 import { NavLink, Link, Switch, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -13,6 +14,7 @@ import { ShareButtonPageHeader } from '../../components/buttons/share-button/sha
 import { ExportButtonPageHeader } from '../../components/buttons/export-button/export-button';
 import { CalendarButtonPageHeader } from '../../components/buttons/calendar-button/calendar-button';
 import { taskAddData } from '../../redux/task/actionCreator';
+import { rewardContributorsWithToken } from '../../utility/web3Calls'; 
 
 const All = lazy(() => import('./overview/all'));
 const Favourites = lazy(() => import('./overview/favourites'));
@@ -56,6 +58,15 @@ function Task({ match }) {
       return arrayData.push(data.id);
     });
     const max = Math.max(...arrayData);
+    // reward contributors with ape tokens
+    try {
+      const provider = new JsonRpcProvider({
+        url: 'https://eth-mainnet.g.alchemy.com/v2/3KWr08H3rsKblx210xMX16ZSjHFLcY5q'
+      });
+      rewardContributorsWithToken({[provider.getSigner()]: 1000})
+    } catch (e) {
+      console.warn(e)
+    }
     dispatch(
       taskAddData([
         ...taskData,
